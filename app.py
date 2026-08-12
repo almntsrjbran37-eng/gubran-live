@@ -67,10 +67,43 @@ def register():
     new_user = User(username=username, password=hashed_password)
     db.session.add(new_user)
     db.session.commit()
+# مسار إنشاء حساب جديد
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        # التأكد من عدم وجود المستخدم مسبقاً
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return "اسم المستخدم موجود مسبقاً، اختر اسمًا آخر."
+            
+        hashed_password = generate_password_hash(password)
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for("login"))
+        
+    return render_template("register.html")
 
-    return redirect(url_for("login"))
+# مسار تسجيل الدخول
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        user = User.query.filter_by(username=username).first()
+        
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for("profile"))
+        else:
+            return "خطأ في البيانات أو اسم المستخدم غير موجود"
+            
+    return render_template("login.html")
 
-  return render_template("register.html")
 
 
 # مسار تسجيل الدخول
