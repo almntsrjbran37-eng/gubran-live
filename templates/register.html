@@ -1,18 +1,26 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<style>
-    input { display: block; margin: 10px auto; padding: 10px; width: 250px; }
-    button { background: green; color: white; border: none; padding: 10px 20px; cursor: pointer; }
-</style>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب جديد - جبران لايف</title>
+    <style>
+        body { background-color: #121212; color: #fff; font-family: Tahoma, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); width: 300px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #28a745; border: none; color: white; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #218838; }
+        a { color: #17a2b8; text-decoration: none; display: block; margin-top: 15px; font-size: 14px; }
+    </style>
 </head>
 <body>
-    <h2>إنشاء حساب جديد</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="اسم المستخدم" required>
-        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-        <input type="text" name="display_name" placeholder="اسم العرض" required>
-        <input type="password" name="password" placeholder="كلمة المرور" required>
-        <button type="submit">تسجيل</button>
-    </form>
+    <div class="card">
+        <h2>إنشاء حساب جديد</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="اسم المستخدم" required>
+            <input type="password" name="password" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل</button>
+        </form>
+        <a href="{{ url_for('login') }}">لديك حساب بالفعل؟ سجل الدخول هنا</a>
+    </div>
 </body>
 </html>
