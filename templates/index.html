@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منصة البث المباشر والدردشة</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; margin: 0; padding: 20px; }
+        h2 { color: #00ffcc; }
+        .top-nav { margin-bottom: 15px; }
+        .top-nav a { background: #333; color: #00ffcc; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; margin: 0 5px; border: 1px solid #00ffcc; }
+        .container { display: flex; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+        .chat-box, .stream-box { background: #222; border: 2px dashed #00ffcc; border-radius: 10px; width: 450px; height: 420px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
+        .stream-box video { width: 100%; height: 75%; background: black; border-radius: 5px; object-fit: cover; }
+        .controls { display: flex; gap: 5px; margin-top: 5px; justify-content: center; }
+        .chat-messages { flex-grow: 1; background: #111; border-radius: 5px; padding: 10px; overflow-y: auto; text-align: right; margin-bottom: 10px; }
+        .chat-input-area { display: flex; gap: 5px; }
+        input[type="text"] { flex-grow: 1; padding: 8px; border-radius: 5px; border: none; }
+        button { background: #00ffcc; color: black; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        button:hover { background: #00b388; color: white; }
+        .btn-danger { background: #ff4444 !important; color: white !important; }
+        .floating-hearts { position: absolute; font-size: 20px; animation: floatUp 2s linear forwards; pointer-events: none; }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/profile">👤 ملفي الشخصي</a>
+        <a href="/logout" style="color: #ff4444; border-color: #ff4444;">تسجيل الخروج</a>
+    </div>
+
+    <h2>منصة البث المباشر والدردشة</h2>
+
+    <div class="container">
+        <!-- قسم شاشة البث المباشر والتحكم -->
+        <div class="stream-box">
+            <h3><span style="color:red; font-size:20px;">●</span> شاشة البث المباشر</h3>
+            <video id="webcam" autoplay playsinline></video>
+            <div class="controls">
+                <button onclick="startStream()">تشغيل الكاميرا</button>
+                <button onclick="toggleAudio()" class="btn-danger">كتم الصوت</button>
+                <button onclick="sendLike()" style="background: #ff00ff; color: white;">❤️ إعجاب</button>
+            </div>
+        </div>
+
+        <!-- قسم الدردشة الحية -->
+        <div class="chat-box">
+            <h3>الدردشة الحية</h3>
+            <div class="chat-messages" id="chatMessages">
+                <div style="color: #888;">أهلاً بك في الغرفة...</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="messageInput" placeholder="اكتب رسالتك...">
+                <button onclick="sendMessage()">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let localStream = null;<!-- قائمة الهدايا -->
+<div class="gift-box" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+    <button onclick="window.location.href='/send_gift'" style="background: gold; color: black; font-size: 14px;">🎁 هدية (50 عملة)</button>
+    <button onclick="window.location.href='/add_balance'" style="background: blue; color: white; font-size: 14px;">➕ شحن رصيد</button>
+</div>
+
+        // تشغيل الكاميرا
+        function startStream() {
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function(stream) {
+                localStream = stream;
+                var videoElement = document.getElementById('webcam');
+                videoElement.srcObject = stream;
+            })
+            .catch(function(error) {
+                alert("تعذر الوصول إلى الكاميرا.");
+            });
+        }
+
+        // زر كتم الصوت للمذيع
+        function toggleAudio() {
+            if (localStream…

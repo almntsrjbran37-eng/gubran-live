@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الملف الشخصي</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding-top: 30px; margin: 0; }
+        .profile-card { background: #222; border: 2px solid #00ffcc; border-radius: 15px; width: 350px; margin: 0 auto; padding: 25px; box-shadow: 0 4px 10px rgba(0,255,204,0.2); }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; background: #00ffcc; color: black; font-size: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; }
+        h2 { color: #00ffcc; margin-bottom: 5px; }
+        p { color: #bbb; margin: 8px 0; }
+        .balance-box { background: #111; padding: 10px; border-radius: 8px; margin: 15px 0; color: #ffcc00; font-weight: bold; }
+        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        a { text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; }
+        .btn-home { background: #00ffcc; color: black; }
+        .btn-logout { background: #ff4444; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="profile-card">
+        <!-- صورة افتراضية أول حرف من الاسم -->
+        <div class="avatar">{{ user.username[0] }}</div>
+    
+        <h2>{{ user.username }}</h2>
+        <p>اسم المستخدم: @{{ user.username }}</p>
+        <p>البريد الإلكتروني: {{ user.email }}</p>
+        <p>{{ user.bio }}</p>
+
+        <div class="balance-box">
+            💎 رصيد العملات: {{ user.balance }} عملة
+        </div>
+
+        <div class="btn-group">
+            <a href="/" class="btn-home">الرئيسية والبث</a>
+            <a href="/logout" class="btn-logout">تسجيل الخروج</a>
+        </div>
+    </div>
+
+</body>
+</html><a href="/add_balance" style="background: #ffcc00; color: black; display: block; margin-top: 10px;">شحن الرصيد الآن 💰</a>

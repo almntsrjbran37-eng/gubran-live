@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم الإدارية</title>
+    <style>
+        body { background: #111; color: #fff; font-family: Tahoma, sans-serif; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #444; padding: 12px; text-align: center; }
+        th { background: #333; }
+        h1 { color: #28a745; }
+    </style>
+</head>
+<body>
+    <h1>مرحباً بك يا مدير المنصة</h1>
+    <a href="/" style="color: #fff;">العودة للرئيسية</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>اسم المستخدم</th>
+            <th>الصلاحيات</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ 'أدمن' if user.is_admin else 'مستخدم عادي' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
